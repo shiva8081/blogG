@@ -12,6 +12,7 @@ export const PostPage = ({posts,Deletehandle}) => {
         <h2>{post.title}</h2>
         <p>{post.datetime} </p>
         <p>{post.body} </p>
+        <Link to={`/edit/${post.id}`}><button className="editButton border-2 bg-red-500 py-2 px-2 mx-2 my-2">Edit Post</button></Link>
         <button className='border-2 bg-red-500 py-2 px-2 mx-2 my-2' onClick={()=>Deletehandle(post.id)}> Delete post </button>
 
         </>}
