@@ -14,7 +14,7 @@ export const Editpost = ({posts,edittitle,editbody,setedittitle,seteditbody,hand
   return (
     
     <div className='Newpost '>
-        {edittitle &&
+        {/* {edittitle && */}
         <>
     <h2 className='my-5 '>EDIT POST</h2>
     <form onSubmit={(e)=>e.preventDefault()} className='flex flex-col'>
@@ -25,8 +25,8 @@ export const Editpost = ({posts,edittitle,editbody,setedittitle,seteditbody,hand
       <button className='mx-4 my-4 bg-red-500 w-[10rem] ' onClick={() => handleupdate(post.id)}>Submit</button>
     </form>
     </>
-}
-{!edittitle &&
+{/* } */}
+{/* {!edittitle &&
                 <>
                     <h2>Post Not Found</h2>
                     <p>Well, that's disappointing.</p>
@@ -34,7 +34,7 @@ export const Editpost = ({posts,edittitle,editbody,setedittitle,seteditbody,hand
                         <Link to='/'>Visit Our Homepage</Link>
                     </p>
                 </>
-            }
+            } */}
     </div>
   )
 }

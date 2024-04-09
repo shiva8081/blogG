@@ -15,9 +15,6 @@ import api from './api/posts'
 import { Editpost } from './components/Editpost';
 
 
-
-
-
 function App() {
 
   const [posts, setposts] = useState([]);
@@ -99,7 +96,7 @@ function App() {
   }
   return (
     <>
-      <Header title="Blog App" />
+      <Header title="Blog App"  />
       <Nav search={search} setsearch={setsearch} />
       <Routes>
         <Route exact path='/' element={<Home posts={searchResult} />} />
