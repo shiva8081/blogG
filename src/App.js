@@ -3,7 +3,7 @@ import './App.css';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Nav } from './components/Nav';
-import { Home } from './components/Home';
+import  Home  from './components/Home';
 import { NewPost } from './components/NewPost';
 import { PostPage } from './components/PostPage';
 import { About } from './components/About';
@@ -13,6 +13,7 @@ import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import api from './api/posts'
 import { Editpost } from './components/Editpost';
+import { useApiFetch } from './hooks/useApiFetch';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
   const [edittitle, setedittitle] = useState('');
   const [postbody, setpostbody] = useState('');
   const [editbody, seteditbody] = useState('');
+  const {Data,fetcherror,isloading}=useApiFetch('http://localhost:3500/posts');
 
   useEffect(() => {
     const filteredResults = posts.filter((post) =>
@@ -33,23 +35,30 @@ function App() {
     setsearchResult(filteredResults.reverse());
   }, [posts, search])
 
-  useEffect(() => {
-    const fetchposts = async () => {
-      try {
-        const response = await api.get('/posts');
-        setposts(response.data);
-      } catch (err) {
-        if (err.response) {
-          console.log(err.response.data)
-          console.log(err.response.status)
-          console.log(err.response.Header)
-        } else {
-          console.log(`error :${err.message}`);
-        }
-      }
-    }
-    fetchposts();
-  }, [])
+
+  useEffect(()=>{
+   
+      setposts(Data)
+    
+  },[Data])
+// //fetching data from the json server
+//   useEffect(() => {
+//     const fetchposts = async () => {
+//       try {
+//         const response = await api.get('/posts');
+//         setposts(response.data);
+//       } catch (err) {
+//         if (err.response) {
+//           console.log(err.response.data)
+//           console.log(err.response.status)
+//           console.log(err.response.Header)
+//         } else {
+//           console.log(`error :${err.message}`);
+//         }
+//       }
+//     }
+//     fetchposts();
+//   }, [])
 
   const handlesubmit = async (e) => {
     e.preventDefault();
@@ -99,7 +108,7 @@ function App() {
       <Header title="Blog App"  />
       <Nav search={search} setsearch={setsearch} />
       <Routes>
-        <Route exact path='/' element={<Home posts={searchResult} />} />
+        <Route exact path='/' element={<Home posts={searchResult} fetcherror={fetcherror} isloading={isloading} />} />
         <Route exact path='/post' element={<NewPost handlesubmit={handlesubmit} setposttitle={setposttitle} posttitle={posttitle} postbody={postbody} setpostbody={setpostbody} />} />
         <Route exact path='/edit/:id' element={<Editpost posts={posts} handleupdate={handleupdate} setedittitle={setedittitle} edittitle={edittitle} editbody={editbody} seteditbody={seteditbody} />} />
         

@@ -18,11 +18,8 @@
         handleresize();
         window.addEventListener('resize',handleresize);
 
-        const cleanUp=()=>{
-            console.log('runs if useeffect dep change');
-            window.removeEventListener('resize',handleresize)
-        }
-        return cleanUp;
+       
+        return ()=>window.removeEventListener('resize',handleresize)
     },[])
    return Widowsize;
  }

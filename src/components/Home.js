@@ -1,12 +1,13 @@
 import React from 'react'
 import { Feed } from './Feed'
-
-export const Home = ({posts}) => {
-  // console.log(posts);
+const Home = ({ posts, fetcherror, isLoading }) => {
   return (
-    <div className='Home'>
-      {posts.length?(<Feed posts={posts} />):(<p style={{marginTop:"2rem"}}> no post to display</p>)}
-    </div>
+      <main className="Home">
+          {isLoading && <p className="statusMsg">Loading posts...</p>}
+          {!isLoading && fetcherror && <p className="statusMsg" style={{ color: "red" }}>{fetcherror}</p>}
+          {!isLoading && !fetcherror && (posts&&posts.length ? <Feed posts={posts} /> : <p className="statusMsg">No posts to display.</p>)}
+      </main>
   )
 }
- 
+
+export default Home;
